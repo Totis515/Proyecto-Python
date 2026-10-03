@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ titulo_pagina }} | Acción Contra el Cambio Climático</title>
+  <meta name="description" content="Plataforma interactiva sobre la crisis climática global. Monitorea datos en tiempo real, calcula tu huella de carbono y conversa con EcoBot, tu asistente ecológico inteligente.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="ambient-glow glow-top"></div>
+  <div class="ambient-glow glow-bottom"></div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="brand-logo">
+        <div class="logo-icon-wrap">
+          <i class="fa-solid fa-earth-americas"></i>
+          <span class="pulse-dot"></span>
+        </div>
+        <div class="brand-text-col">
+          <span class="brand-name">Terra<span class="text-gradient">Pulse</span></span>
+          <span class="brand-creator-badge"><i class="fa-solid fa-code"></i> {{ autor }}</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#impacto" class="nav-link"><i class="fa-solid fa-chart-line"></i> Impacto</a>
+        <a href="#calculadora" class="nav-link"><i class="fa-solid fa-calculator"></i> Tu Huella</a>
+        <a href="#mitos" class="nav-link"><i class="fa-solid fa-bolt"></i> Mitos vs Realidad</a>
+        <a href="#soluciones" class="nav-link"><i class="fa-solid fa-seedling"></i> Acciones</a>
+        <a href="#arcade" class="nav-link"><i class="fa-solid fa-gamepad"></i> Jueguillos</a>
+        <a href="#ecobot-section" class="nav-link"><i class="fa-solid fa-robot"></i> EcoBot IA</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn btn-glow" id="openChatNavBtn" onclick="toggleFloatingChat(true)">
+          <i class="fa-solid fa-comment-dots"></i>
+          <span>Chatear con EcoBot</span>
+        </button>
+        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Abrir menú">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Live Climate Ticker -->
+  <div class="live-ticker">
+    <div class="ticker-wrapper">
+      <div class="ticker-item"><span class="badge red"><i class="fa-solid fa-circle-radiation"></i> EN VIVO</span></div>
+      <div class="ticker-item">CO₂ Atmosférico: <strong id="tickerCo2">424.3 ppm</strong> <span class="trend-up">▲ +2.4 ppm/año</span></div>
+      <div class="ticker-divider">•</div>
+      <div class="ticker-item">Aumento Temp. Global: <strong id="tickerTemp">+1.28°C</strong> <span class="trend-warn">Límite crítico: 1.5°C</span></div>
+      <div class="ticker-divider">•</div>
+      <div class="ticker-item">Hectáreas de bosque deforestadas hoy: <strong id="tickerForest">18,450</strong> ha</div>
+      <div class="ticker-divider">•</div>
+      <div class="ticker-item">Hielo Ártico derretido hoy: <strong id="tickerIce">124,000</strong> ton</div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-badges-group">
+            <div class="creator-hero-tag">
+              <i class="fa-solid fa-user-astronaut"></i>
+              <span>Milton Mendoza - Kodland</span>
+            </div>
+            <div class="hero-badge">
+              <span class="badge-icon"><i class="fa-solid fa-fire-flame-curved"></i></span>
+              <span>Crisis Climática 2026 • Emergencia Planetaria</span>
+            </div>
+          </div>
+          
+          <h1 class="hero-title">
+            El tiempo no espera.<br>
+            <span class="text-gradient">El futuro se decide hoy.</span>
+          </h1>
+          
+          <p class="hero-description">
+            La Tierra está experimentando las temperaturas más altas en 125,000 años. Descubre los datos reales sin filtros, calcula el impacto de tus hábitos y actúa con soluciones prácticas guiadas por nuestra inteligencia artificial ecológica.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#calculadora" class="btn btn-primary btn-large">
+              <i class="fa-solid fa-gauge-high"></i> Calcular Mi Huella
+            </a>
+            <button class="btn btn-secondary btn-large" onclick="focusEcoBotInput()">
+              <i class="fa-solid fa-robot"></i> Pregúntale a EcoBot
+            </button>
+          </div>
+
+          <!-- Hero Metrics Cards -->
+          <div class="hero-stats-row">
+            <div class="hero-stat-card">
+              <span class="stat-number text-gradient-green">+1.28°C</span>
+              <span class="stat-label">Sobre la era preindustrial</span>
+            </div>
+            <div class="hero-stat-card">
+              <span class="stat-number text-gradient-cyan">-13%</span>
+              <span class="stat-label">Hielo ártico por década</span>
+            </div>
+            <div class="hero-stat-card">
+              <span class="stat-number text-gradient-amber">1 Millón</span>
+              <span class="stat-label">Especies en riesgo</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="image-frame">
+            <img src="assets/hero-banner.jpg" alt="Planeta Tierra y Cambio Climático" class="hero-banner-img" id="heroImg">
+            <div class="image-overlay-glow"></div>
+            
+            <!-- Floating interactive card on image -->
+            <div class="floating-badge badge-top-right">
+              <div class="badge-icon green"><i class="fa-solid fa-leaf"></i></div>
+              <div>
+                <strong>Meta Global</strong>
+                <p>Cero Emisiones Netas 2050</p>
+              </div>
+            </div>
+
+            <div class="floating-badge badge-bottom-left">
+              <div class="badge-icon red"><i class="fa-solid fa-triangle-exclamation"></i></div>
+              <div>
+                <strong>Punto de No Retorno</strong>
+                <p>Evitar superar +1.5°C</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impact & Statistics Section -->
+    <section class="section" id="impacto">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-sub">REALIDAD CIENTÍFICA</span>
+          <h2 class="section-title">El Impacto de la Crisis <span class="text-gradient">En Cifras</span></h2>
+          <p class="section-desc">Evidencia respaldada por el IPCC (Panel Intergubernamental del Cambio Climático) y la NASA.</p>
+        </div>
+
+        <div class="cards-grid">
+          <!-- Card 1 -->
+          <div class="glass-card stat-detail-card" data-tilt>
+            <div class="card-icon red">
+              <i class="fa-solid fa-temperature-arrow-up"></i>
+            </div>
+            <span class="card-tag alert">Alerta Crítica</span>
+            <h3 class="card-title">Olas de Calor Récord</h3>
+            <p class="card-text">
+              Los últimos 10 años han sido los más calurosos registrados en la historia humana. Sequías extremas amenazan la seguridad hídrica y alimentaria de 3,000 millones de personas.
+            </p>
+            <div class="progress-bar-wrap">
+              <div class="progress-info">
+                <span>Riesgo Global de Sequías</span>
+                <span class="text-red">+68%</span>
+              </div>
+              <div class="progress-rail">
+                <div class="progress-fill fill-red" style="width: 68%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="glass-card stat-detail-card" data-tilt>
+            <div class="card-icon cyan">
+              <i class="fa-solid fa-water"></i>
+            </div>
+            <span class="card-tag info">Océanos & Polos</span>
+            <h3 class="card-title">Elevación del Nivel del Mar</h3>
+            <p class="card-text">
+              La Antártida y Groenlandia pierden más de 400,000 millones de toneladas de hielo al año. Ciudades costeras podrían quedar inhabitables para el 2070 si no mitigamos la curva.
+            </p>
+            <div class="progress-bar-wrap">
+              <div class="progress-info">
+                <span>Pérdida de masa polar</span>
+                <span class="text-cyan">3.7 mm/año</span>
+              </div>
+              <div class="progress-rail">
+                <div class="progress-fill fill-cyan" style="width: 76%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="glass-card stat-detail-card" data-tilt>
+            <div class="card-icon emerald">
+              <i class="fa-solid fa-tree"></i>
+            </div>
+            <span class="card-tag warn">Biodiversidad</span>
+            <h3 class="card-title">Colapso de Ecosistemas</h3>
+            <p class="card-text">
+              Más del 50% de los arrecifes de coral han desaparecido por la acidificación del agua. Los bosques tropicales se aproximan al punto en que emiten más carbono del que absorben.
+            </p>
+            <div class="progress-bar-wrap">
+              <div class="progress-info">
+                <span>Arrecifes Degradados</span>
+                <span class="text-emerald">54%</span>
+              </div>
+              <div class="progress-rail">
+                <div class="progress-fill fill-emerald" style="width: 54%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="glass-card stat-detail-card" data-tilt>
+            <div class="card-icon purple">
+              <i class="fa-solid fa-smog"></i>
+            </div>
+            <span class="card-tag purple-tag">Atmósfera</span>
+            <h3 class="card-title">Gases Efecto Invernadero</h3>
+            <p class="card-text">
+              La concentración de dióxido de carbono alcanzó las 424 ppm, 50% más alta que antes de la Revolución Industrial. El metano (CH₄) acelera el calentamiento 80 veces más a corto plazo.
+            </p>
+            <div class="progress-bar-wrap">
+              <div class="progress-info">
+                <span>Emisiones fósiles anuales</span>
+                <span class="text-purple">37.4 Gt CO₂</span>
+              </div>
+              <div class="progress-rail">
+                <div class="progress-fill fill-purple" style="width: 88%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Carbon Footprint Calculator -->
+    <section class="section calculator-section" id="calculadora">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-sub">HERRAMIENTA INTERACTIVA</span>
+          <h2 class="section-title">Calcula Tu <span class="text-gradient">Huella de Carbono</span></h2>
+          <p class="section-desc">Mueve los controles para estimar tus emisiones anuales de CO₂ y descubre cómo reducirlas de inmediato.</p>
+        </div>
+
+        <div class="calculator-grid">
+          <!-- Controls Panel -->
+          <div class="glass-card calc-controls">
+            <!-- Transport -->
+            <div class="calc-group">
+              <div class="calc-label-row">
+                <label for="transportRange">
+                  <i class="fa-solid fa-car-side text-cyan"></i>
+                  Transporte en auto a gasolina (km semanales):
+                </label>
+                <span class="calc-val" id="transportVal">150 km</span>
+              </div>
+              <input type="range" id="transportRange" min="0" max="600" step="10" value="150" class="custom-slider" oninput="updateCalculator()">
+              <div class="slider-ticks">
+                <span>0 km (Bicicleta/Metro)</span>
+                <span>300 km</span>
+                <span>600+ km</span>
+              </div>
+            </div>
+
+            <!-- Flights -->
+            <div class="calc-group">
+              <div class="calc-label-row">
+                <label for="flightsRange">
+                  <i class="fa-solid fa-plane-departure text-purple"></i>
+                  Vuelos redondos al año (trayectos medios/largos):
+                </label>
+                <span class="calc-val" id="flightsVal">2 vuelos</span>
+              </div>
+              <input type="range" id="flightsRange" min="0" max="15" step="1" value="2" class="custom-slider" oninput="updateCalculator()">
+              <div class="slider-ticks">
+                <span>0</span>
+                <span>5</span>
+                <span>15+</span>
+              </div>
+            </div>
+
+            <!-- Diet -->
+            <div class="calc-group">
+              <label class="calc-label-diet">
+                <i class="fa-solid fa-utensils text-emerald"></i>
+                Tipo de Alimentación Habitual:
+              </label>
+              <div class="diet-options-grid">
+                <button type="button" class="diet-btn active" data-diet="high-meat" onclick="setDiet('high-meat', this)">
+                  <span class="diet-emoji">🥩</span>
+                  <span class="diet-name">Carnívora diaria</span>
+                  <span class="diet-sub">Carne roja frecuente</span>
+                </button>
+                <button type="button" class="diet-btn" data-diet="low-meat" onclick="setDiet('low-meat', this)">
+                  <span class="diet-emoji">🍗</span>
+                  <span class="diet-name">Flexitariana</span>
+                  <span class="diet-sub">Carne 2-3 veces/semana</span>
+                </button>
+                <button type="button" class="diet-btn" data-diet="vegetarian" onclick="setDiet('vegetarian', this)">
+                  <span class="diet-emoji">🥗</span>
+                  <span class="diet-name">Vegetariana</span>
+                  <span class="diet-sub">Lácteos y huevos</span>
+                </button>
+                <button type="button" class="diet-btn" data-diet="vegan" onclick="setDiet('vegan', this)">
+                  <span class="diet-emoji">🌱</span>
+                  <span class="diet-name">100% Vegana</span>
+                  <span class="diet-sub">Base vegetal</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Home Electricity -->
+            <div class="calc-group">
+              <div class="calc-label-row">
+                <label for="electricRange">
+                  <i class="fa-solid fa-bolt text-amber"></i>
+                  Consumo mensual aproximado de luz (kWh o nivel):
+                </label>
+                <span class="calc-val" id="electricVal">Moderado (250 kWh)</span>
+              </div>
+              <input type="range" id="electricRange" min="1" max="4" step="1" value="2" class="custom-slider" oninput="updateCalculator()">
+              <div class="slider-ticks">
+                <span>Bajo (Ahorro)</span>
+                <span>Moderado</span>
+                <span>Alto (A/C)</span>
+                <span>Muy Alto</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Results Gauge Panel -->
+          <div class="glass-card calc-result-box">
+            <div class="result-badge" id="resultLevelBadge">
+              <i class="fa-solid fa-gauge"></i> Impacto Moderado
+            </div>
+
+            <div class="footprint-circle-wrapper">
+              <svg class="footprint-svg" viewBox="0 0 200 200">
+                <circle class="circle-bg" cx="100" cy="100" r="85"></circle>
+                <circle class="circle-progress" id="calcCircleProgress" cx="100" cy="100" r="85"></circle>
+              </svg>
+              <div class="footprint-center-text">
+                <span class="footprint-number" id="calcTonsNumber">4.8</span>
+                <span class="footprint-unit">Toneladas CO₂e / año</span>
+              </div>
+            </div>
+
+            <div class="calc-benchmark">
+              <div class="benchmark-item">
+                <span>Meta Sostenible 2030:</span>
+                <strong class="text-emerald">2.0 Ton</strong>
+              </div>
+              <div class="benchmark-item">
+                <span>Promedio Mundial:</span>
+                <strong>4.7 Ton</strong>
+              </div>
+              <div class="benchmark-item">
+                <span>Promedio EE.UU./Occidente:</span>
+                <strong class="text-red">14.5 Ton</strong>
+              </div>
+            </div>
+
+            <div class="calc-personalized-tip" id="calcTipBox">
+              <div class="tip-header">
+                <i class="fa-solid fa-lightbulb text-amber"></i>
+                <strong>Acción Clave para Reducir:</strong>
+              </div>
+              <p id="calcTipText">
+                Usar transporte público o bicicleta 2 días a la semana recortaría 0.8 toneladas de CO₂ al año de tu cuenta.
+              </p>
+            </div>
+
+            <button class="btn btn-emerald btn-full" onclick="askBotAboutMyFootprint()">
+              <i class="fa-solid fa-robot"></i> Pedir Plan Personalizado a EcoBot
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EcoBot Interactive Section (Embedded Showcase) -->
+    <section class="section ecobot-section-wrap" id="ecobot-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-sub"><i class="fa-solid fa-microchip"></i> INTELIGENCIA ARTIFICIAL VERDE</span>
+          <h2 class="section-title">Habla con <span class="text-gradient">EcoBot</span></h2>
+          <p class="section-desc">Tu asesor climático 24/7. Pregúntale cualquier duda, resuelve mitos o pide consejos prácticos.</p>
+        </div>
+
+        <div class="ecobot-showcase-container glass-card">
+          <!-- EcoBot Window -->
+          <div class="chat-window-inner">
+            <div class="chat-header">
+              <div class="chat-bot-info">
+                <div class="bot-avatar-wrap" id="mainBotAvatarWrap">
+                  <div class="bot-antenna"><span class="antenna-bulb"></span></div>
+                  <div class="bot-head-screen">
+                    <div class="bot-eyes">
+                      <span class="bot-eye left"></span>
+                      <span class="bot-eye right"></span>
+                    </div>
+                    <div class="bot-mouth" id="mainBotMouth">
+                      <span class="mouth-bar bar-1"></span>
+                      <span class="mouth-bar bar-2"></span>
+                      <span class="mouth-bar bar-3"></span>
+                      <span class="mouth-bar bar-4"></span>
+                      <span class="mouth-bar bar-5"></span>
+                    </div>
+                  </div>
+                  <span class="online-indicator"></span>
+                </div>
+                <div>
+                  <h3 class="bot-name">EcoBot • Asistente Climático</h3>
+                  <span class="bot-status" id="mainBotStatus"><i class="fa-solid fa-circle text-emerald"></i> En línea y analizando datos</span>
+                </div>
+              </div>
+              <div class="chat-header-actions">
+                <button class="voice-toggle-btn active" id="voiceToggleBtn" onclick="toggleVoiceSpeech()" title="Activar/Silenciar voz de EcoBot">
+                  <i class="fa-solid fa-microphone-lines" id="voiceIcon"></i>
+                  <span class="voice-btn-label">Voz Activa</span>
+                </button>
+                <button class="sound-toggle-btn" id="soundToggleBtn" onclick="toggleAudio()" title="Efectos de sonido">
+                  <i class="fa-solid fa-volume-high" id="soundIcon"></i>
+                </button>
+                <button class="clear-chat-btn" onclick="clearChatHistory()" title="Reiniciar conversación">
+                  <i class="fa-solid fa-rotate-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Messages Stream -->
+            <div class="chat-messages" id="chatMessages">
+              <!-- Welcome Bot Message -->
+              <div class="chat-msg bot-msg">
+                <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
+                <div class="msg-bubble">
+                  <p>¡Hola! Soy <strong>EcoBot</strong> 🌱, tu asistente de inteligencia ambiental.</p>
+                  <p>Puedo explicarte cómo funciona el calentamiento global, darte tips para ahorrar energía y dinero, o decirte cómo ayudar a tu ciudad. ¿Qué te gustaría saber hoy?</p>
+                  <div class="msg-time">Ahora</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Questions Chips -->
+            <div class="quick-chips-container">
+              <span class="chips-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Sugerencias:</span>
+              <div class="chips-scroll">
+                <button class="chip-btn" onclick="sendQuickPrompt('¿Qué jueguillos hay para jugar?')">🕹️ Jueguillos Arcade</button>
+                <button class="chip-btn" onclick="sendQuickPrompt('¿Cuál es la diferencia entre cambio climático y calentamiento global?')">¿Qué es el cambio climático?</button>
+                <button class="chip-btn" onclick="sendQuickPrompt('¿Cuáles son 5 acciones fáciles para reducir mi huella de carbono hoy?')">5 acciones fáciles hoy</button>
+                <button class="chip-btn" onclick="sendQuickPrompt('¿Por qué 1.5 grados es tan importante?')">¿Por qué 1.5°C importa?</button>
+                <button class="chip-btn" onclick="sendQuickPrompt('¿Qué países son los que más contaminan?')">Países más contaminantes</button>
+                <button class="chip-btn" onclick="sendQuickPrompt('¿El reciclaje realmente sirve o es un mito?')">¿El reciclaje sirve?</button>
+              </div>
+            </div>
+
+            <!-- Chat Input Bar -->
+            <div class="chat-input-bar">
+              <input type="text" id="chatInput" placeholder="Escribe tu pregunta sobre el clima, energía, hábitos..." onkeydown="handleInputKey(event)" autocomplete="off">
+              <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Myths vs Facts Section -->
+    <section class="section" id="mitos">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-sub">COMBATIENDO LA DESINFORMACIÓN</span>
+          <h2 class="section-title">Mitos vs <span class="text-gradient">Realidad Científica</span></h2>
+          <p class="section-desc">Haz clic en cada tarjeta para desmentir las falacias climáticas más comunes.</p>
+        </div>
+
+        <div class="myths-grid">
+          <!-- Myth 1 -->
+          <div class="myth-card glass-card" onclick="toggleMyth(this)">
+            <div class="myth-badge myth">MITO COMÚN</div>
+            <h3 class="myth-title">"El clima siempre ha cambiado de forma natural, no es culpa del humano."</h3>
+            <div class="myth-indicator"><i class="fa-solid fa-chevron-down"></i> Ver evidencia</div>
+            <div class="myth-answer">
+              <div class="myth-badge fact">REALIDAD CIENTÍFICA</div>
+              <p>Aunque la Tierra ha tenido ciclos glaciares e interglaciares, tomaban decenas de miles de años. El calentamiento actual ocurre <strong>10 veces más rápido</strong> que cualquier evento geológico natural y coincide exactamente con el auge de quema de petróleo, carbón y gas desde 1850.</p>
+            </div>
+          </div>
+
+          <!-- Myth 2 -->
+          <div class="myth-card glass-card" onclick="toggleMyth(this)">
+            <div class="myth-badge myth">MITO COMÚN</div>
+            <h3 class="myth-title">"Hizo mucho frío este invierno, por lo tanto el calentamiento global es falso."</h3>
+            <div class="myth-indicator"><i class="fa-solid fa-chevron-down"></i> Ver evidencia</div>
+            <div class="myth-answer">
+              <div class="myth-badge fact">REALIDAD CIENTÍFICA</div>
+              <p>Confunde <strong>tiempo meteorológico</strong> (lo que pasa hoy) con <strong>clima</strong> (promedio en décadas). El calentamiento del Ártico desestabiliza el vórtice polar, empujando olas de frío anómalas hacia el sur, mientras que la temperatura promedio global bate récords históricos cada año.</p>
+            </div>
+          </div>
+
+          <!-- Myth 3 -->
+          <div class="myth-card glass-card" onclick="toggleMyth(this)">
+            <div class="myth-badge myth">MITO COMÚN</div>
+            <h3 class="myth-title">"Las energías renovables son demasiado caras y poco confiables."</h3>
+            <div class="myth-indicator"><i class="fa-solid fa-chevron-down"></i> Ver evidencia</div>
+            <div class="myth-answer">
+              <div class="myth-badge fact">REALIDAD CIENTÍFICA</div>
+              <p>En la actualidad, la energía solar fotovoltaica y la eólica son las fuentes de electricidad <strong>más baratas de la historia</strong>, con costos que cayeron más del 85% en la última década. Los sistemas de almacenamiento con baterías resuelven la intermitencia eficazmente.</p>
+            </div>
+          </div>
+
+          <!-- Myth 4 -->
+          <div class="myth-card glass-card" onclick="toggleMyth(this)">
+            <div class="myth-badge myth">MITO COMÚN</div>
+            <h3 class="myth-title">"Mis acciones individuales no importan frente a las grandes corporaciones."</h3>
+            <div class="myth-indicator"><i class="fa-solid fa-chevron-down"></i> Ver evidencia</div>
+            <div class="myth-answer">
+              <div class="myth-badge fact">REALIDAD CIENTÍFICA</div>
+              <p>Ambas son necesarias. Las elecciones de consumo dirigen la demanda del mercado y fuerzan a las industrias a descarbonizarse. Además, la participación ciudadana y el voto impulsan regulaciones e inversiones públicas cruciales para la transición energética.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Action Pillars / Checklist Section -->
+    <section class="section" id="soluciones">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-sub">PLAN DE ACCIÓN CONCRETO</span>
+          <h2 class="section-title">Sé Parte de la <span class="text-gradient">Solución</span></h2>
+          <p class="section-desc">Marca las acciones que ya realizas o te comprometes a iniciar para subir tu Nivel de Impacto Verde.</p>
+        </div>
+
+        <div class="checklist-overview glass-card">
+          <div class="checklist-header-flex">
+            <div>
+              <h3 class="checklist-title">Tu Nivel de Compromiso Ambiental</h3>
+              <p class="checklist-subtitle">Completa desafíos para desbloquear logros sustentables</p>
+            </div>
+            <div class="score-badge">
+              <span id="scorePercentage">0%</span>
+              <small id="scoreLevelText">Comenzando</small>
+            </div>
+          </div>
+
+          <div class="score-progress-bar">
+            <div class="score-progress-fill" id="scoreFill" style="width: 0%;"></div>
+          </div>
+
+          <div class="actions-grid">
+            <label class="action-item" onclick="toggleAction(this)">
+              <input type="checkbox" class="action-check">
+              <div class="action-custom-box"><i class="fa-solid fa-check"></i></div>
+              <div class="action-details">
+                <strong>Reducir desperdicio de comida</strong>
+                <span>Planificar compras semanales y compostar residuos orgánicos.</span>
+              </div>
+            </label>
+
+            <label class="action-item" onclick="toggleAction(this)">
+              <input type="checkbox" class="action-check">
+              <div class="action-custom-box"><i class="fa-solid fa-check"></i></div>
+              <div class="action-details">
+                <strong>Movilidad Activa y Pública</strong>
+                <span>Caminar, usar bici o transporte público al menos 2 días por semana.</span>
+              </div>
+            </label>
+
+            <label class="action-item" onclick="toggleAction(this)">
+              <input type="checkbox" class="action-check">
+              <div class="action-custom-box"><i class="fa-solid fa-check"></i></div>
+              <div class="action-details">
+                <strong>Lunes sin carne (o dieta basada en plantas)</strong>
+                <span>Sustituir carne por legumbres y vegetales varios días al mes.</span>
+              </div>
+            </label>
+
+            <label class="action-item" onclick="toggleAction(this)">
+              <input type="checkbox" class="action-check">
+              <div class="action-custom-box"><i class="fa-solid fa-check"></i></div>
+              <div class="action-details">
+                <strong>Eliminar plásticos de un solo uso</strong>
+                <span>Llevar botella reutilizable, bolsas de tela y evitar envases desechables.</span>
+              </div>
+            </label>
+
+            <label class="action-item" onclick="toggleAction(this)">
+              <input type="checkbox" class="action-check">
+              <div class="action-custom-box"><i class="fa-solid fa-check"></i></div>
+              <div class="action-details">
+                <strong>Eficiencia energética en el hogar</strong>
+                <span>Usar focos LED, desconectar aparatos 'vampiro' y regular aire acondicionado a 24°C.</span>
+              </div>
+            </label>
+
+            <label class="action-item" onclick="toggleAction(this)">
+              <input type="checkbox" class="action-check">
+              <div class="action-custom-box"><i class="fa-solid fa-check"></i></div>
+              <div class="action-details">
+                <strong>Compartir y concientizar</strong>
+                <span>Hablar con amigos o familia sobre la emergencia climática y exigir leyes verdes.</span>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+    <!-- Eco-Arcade Mini-Games Section -->
+    <section class="section arcade-section" id="arcade">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-sub"><i class="fa-solid fa-gamepad"></i> ZONA GAMER PLANETARIA</span>
+          <h2 class="section-title">Eco-Arcade <span class="text-gradient">Jueguillos en Fa</span></h2>
+          <p class="section-desc">Pásala chido mientras salvas al planeta. Demuestra tus reflejos atrapando emisiones de CO₂, clasifica residuos a toda velocidad o ponte a prueba en la trivia.</p>
+        </div>
+
+        <!-- Arcade Navigation Tabs -->
+        <div class="arcade-tabs-bar">
+          <button class="arcade-tab-btn active" onclick="switchArcadeGame('catcher', this)">
+            <i class="fa-solid fa-cloud-bolt"></i> 1. Atrapa el CO₂ (Arcade)
+          </button>
+          <button class="arcade-tab-btn" onclick="switchArcadeGame('sorter', this)">
+            <i class="fa-solid fa-recycle"></i> 2. Clasifica en Fa (Blitz)
+          </button>
+          <button class="arcade-tab-btn" onclick="switchArcadeGame('trivia', this)">
+            <i class="fa-solid fa-brain"></i> 3. Trivia Relámpago
+          </button>
+        </div>
+
+        <!-- ================= Game 1: CO2 Catcher Canvas ================= -->
+        <div class="arcade-game-view active glass-card" id="game-catcher">
+          <div class="game-hud">
+            <div class="hud-item">
+              <span class="hud-label">Puntaje</span>
+              <span class="hud-value text-emerald" id="catcherScore">0</span>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label">Temperatura Global</span>
+              <span class="hud-value text-amber" id="catcherTemp">+1.28°C</span>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label">Récord</span>
+              <span class="hud-value text-cyan" id="catcherHighScore">0</span>
+            </div>
+            <div class="hud-actions">
+              <button class="btn btn-emerald btn-sm" id="catcherStartBtn" onclick="startCatcherGame()">
+                <i class="fa-solid fa-play"></i> Iniciar
+              </button>
+              <button class="btn btn-secondary btn-sm" id="catcherResetBtn" onclick="resetCatcherGame()">
+                <i class="fa-solid fa-rotate-right"></i> Reiniciar
+              </button>
+            </div>
+          </div>
+
+          <!-- Canvas Container -->
+          <div class="canvas-wrapper">
+            <canvas id="catcherCanvas" width="800" height="450"></canvas>
+            
+            <!-- Overlay Screen (Start / Game Over) -->
+            <div class="canvas-overlay" id="catcherOverlay">
+              <div class="overlay-content">
+                <div class="overlay-icon"><i class="fa-solid fa-earth-americas"></i></div>
+                <h3 id="overlayTitle">¡Misión: Salvar la Atmósfera!</h3>
+                <p id="overlayDesc">
+                  Mueve el <strong>Eco-Dron</strong> (con el ratón, dedo o flechas ← →).<br>
+                  Atrapa ☀️ Energía Solar (+15), 🌱 Semillas (+20) y neutraliza 💨 Nubes de CO₂ (+30).<br>
+                  <span class="text-red">¡Evita los 🛢️ Barriles de Petróleo porque suben la temperatura global!</span>
+                </p>
+                <button class="btn btn-primary btn-large" onclick="startCatcherGame()">
+                  <i class="fa-solid fa-gamepad"></i> ¡Jugar Ahora!
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="game-footer-help">
+            <span><i class="fa-solid fa-keyboard"></i> <strong>Controles:</strong> Mueve el cursor, toca la pantalla o usa las teclas <strong>←</strong> y <strong>→</strong> (o <strong>A</strong> / <strong>D</strong>).</span>
+          </div>
+        </div>
+
+        <!-- ================= Game 2: Trash Sorter Blitz ================= -->
+        <div class="arcade-game-view glass-card" id="game-sorter">
+          <div class="sorter-header-hud">
+            <div class="hud-item">
+              <span class="hud-label">Tiempo Restante</span>
+              <span class="hud-value text-amber" id="sorterTimer">30s</span>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label">Puntos</span>
+              <span class="hud-value text-emerald" id="sorterScore">0</span>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label">Racha Combo</span>
+              <span class="hud-value text-cyan" id="sorterStreak">x1</span>
+            </div>
+          </div>
+
+          <!-- Active Waste Card -->
+          <div class="sorter-arena" id="sorterArena">
+            <div class="sorter-prompt-label">¿A qué contenedor pertenece este residuo?</div>
+            <div class="waste-card" id="wasteCard">
+              <div class="waste-emoji" id="wasteEmoji">🍌</div>
+              <div class="waste-name" id="wasteName">Cáscara de Plátano</div>
+              <div class="waste-hint" id="wasteHint">Residuo de origen natural</div>
+            </div>
+
+            <!-- Bins Buttons -->
+            <div class="bins-grid">
+              <button class="bin-btn bin-organic" onclick="handleSortWaste('organic')">
+                <div class="bin-icon">🍏</div>
+                <strong>1. Orgánico</strong>
+                <small>Restos de fruta, comida, hojas</small>
+                <span class="shortcut-key">Tecla 1</span>
+              </button>
+
+              <button class="bin-btn bin-recyclable" onclick="handleSortWaste('recyclable')">
+                <div class="bin-icon">♻️</div>
+                <strong>2. Reciclable</strong>
+                <small>Plástico PET, latas, vidrio, papel limpio</small>
+                <span class="shortcut-key">Tecla 2</span>
+              </button>
+
+              <button class="bin-btn bin-special" onclick="handleSortWaste('special')">
+                <div class="bin-icon">⚠️</div>
+                <strong>3. No Reciclable / Especial</strong>
+                <small>Pilas, focos, envolturas metalizadas, colillas</small>
+                <span class="shortcut-key">Tecla 3</span>
+              </button>
+            </div>
+
+            <!-- Sorter Overlay Screen -->
+            <div class="sorter-overlay" id="sorterOverlay">
+              <div class="overlay-content">
+                <div class="overlay-icon">🗑️</div>
+                <h3 id="sorterOverlayTitle">Clasifica en Fa</h3>
+                <p id="sorterOverlayDesc">Tienes 30 segundos para clasificar la mayor cantidad de residuos correctamente. ¡Crea combos para multiplicar tus puntos!</p>
+                <button class="btn btn-primary btn-large" onclick="startSorterGame()">
+                  <i class="fa-solid fa-play"></i> Comenzar Reto
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= Game 3: Speed Trivia ================= -->
+        <div class="arcade-game-view glass-card" id="game-trivia">
+          <div class="trivia-header-hud">
+            <div class="hud-item">
+              <span class="hud-label">Pregunta</span>
+              <span class="hud-value text-cyan" id="triviaQuestionNum">1 / 5</span>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label">Aciertos</span>
+              <span class="hud-value text-emerald" id="triviaScore">0</span>
+            </div>
+          </div>
+
+          <div class="trivia-container" id="triviaContainer">
+            <div class="trivia-question-box">
+              <span class="trivia-category-badge" id="triviaCategory">Ciencia del Clima</span>
+              <h3 class="trivia-question-text" id="triviaQuestionText">¿Cuál es el gas de efecto invernadero emitido en mayor volumen por la actividad humana?</h3>
+            </div>
+
+            <div class="trivia-options-grid" id="triviaOptionsGrid">
+              <!-- Options populated dynamically -->
+            </div>
+
+            <div class="trivia-explanation-box" id="triviaExplanationBox" style="display: none;">
+              <div class="explanation-icon"><i class="fa-solid fa-lightbulb"></i></div>
+              <p id="triviaExplanationText"></p>
+              <button class="btn btn-primary btn-sm" id="triviaNextBtn" onclick="nextTriviaQuestion()">
+                Siguiente Pregunta <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-col brand-col">
+        <div class="brand-logo">
+          <i class="fa-solid fa-earth-americas text-emerald"></i>
+          <span>Terra<span class="text-gradient">Pulse</span></span>
+        </div>
+        <p class="footer-desc">
+          Tecnología y datos al servicio de la preservación del único planeta habitable que tenemos. Creado con pasión por un futuro carbono neutral.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <ul class="footer-links">
+          <li><a href="#hero">Inicio</a></li>
+          <li><a href="#impacto">Impacto Global</a></li>
+          <li><a href="#calculadora">Calculadora CO₂</a></li>
+          <li><a href="#mitos">Mitos del Clima</a></li>
+          <li><a href="#soluciones">Plan de Acción</a></li>
+          <li><a href="#arcade">Eco-Arcade 🕹️</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Fuentes Científicas</h4>
+        <ul class="footer-links">
+          <li><a href="https://www.ipcc.ch/" target="_blank" rel="noopener">IPCC (Panel Intergubernamental)</a></li>
+          <li><a href="https://climate.nasa.gov/" target="_blank" rel="noopener">NASA Climate Change</a></li>
+          <li><a href="https://www.noaa.gov/" target="_blank" rel="noopener">NOAA Global Monitoring</a></li>
+          <li><a href="https://www.un.org/es/climatechange" target="_blank" rel="noopener">ONU Cambio Climático</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col newsletter-col">
+        <h4>Eco-Boletín Mensual</h4>
+        <p>Recibe noticias positivas sobre transición energética y avances científicos.</p>
+        <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+          <input type="email" id="newsletterEmail" placeholder="tu@correo.com" required>
+          <button type="submit" class="btn btn-emerald"><i class="fa-solid fa-arrow-right"></i></button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container bottom-flex">
+        <p>© 2026 TerraPulse • Todos los derechos reservados por un planeta vivo.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Github"><i class="fa-brands fa-github"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Chatbot Widget Button & Pop-out Box -->
+  <div class="floating-bot-container" id="floatingBotContainer">
+    <!-- Pop-up Chat Card -->
+    <div class="floating-chat-box" id="floatingChatBox">
+      <div class="floating-chat-header">
+        <div class="chat-bot-info">
+          <div class="bot-avatar-wrap" id="floatingBotAvatarWrap">
+            <div class="bot-antenna"><span class="antenna-bulb"></span></div>
+            <div class="bot-head-screen">
+              <div class="bot-eyes">
+                <span class="bot-eye left"></span>
+                <span class="bot-eye right"></span>
+              </div>
+              <div class="bot-mouth" id="floatingBotMouth">
+                <span class="mouth-bar bar-1"></span>
+                <span class="mouth-bar bar-2"></span>
+                <span class="mouth-bar bar-3"></span>
+                <span class="mouth-bar bar-4"></span>
+                <span class="mouth-bar bar-5"></span>
+              </div>
+            </div>
+            <span class="online-indicator"></span>
+          </div>
+          <div>
+            <strong>EcoBot Flotante</strong>
+            <small id="floatingStatusText">En línea y listo para hablar</small>
+          </div>
+        </div>
+        <button class="close-floating-btn" onclick="toggleFloatingChat(false)">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="floating-chat-body" id="floatingMessages">
+        <div class="chat-msg bot-msg">
+          <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
+          <div class="msg-bubble">
+            <p>¡Aquí estoy! Cuéntame, ¿tienes alguna duda sobre energías limpias, reciclaje o el impacto del clima?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="floating-chat-input-bar">
+        <input type="text" id="floatingInput" placeholder="Escribe aquí..." onkeydown="handleFloatingInputKey(event)">
+        <button class="send-btn" onclick="sendFloatingMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+      </div>
+    </div>
+
+    <!-- Trigger Button -->
+    <button class="floating-bot-trigger" id="floatingBotTrigger" onclick="toggleFloatingChat()" aria-label="Abrir EcoBot">
+      <div class="trigger-icon-wrap">
+        <i class="fa-solid fa-comments chat-open-icon"></i>
+        <i class="fa-solid fa-xmark chat-close-icon"></i>
+      </div>
+      <span class="bot-floating-label">EcoBot</span>
+      <span class="trigger-notification-dot"></span>
+    </button>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
