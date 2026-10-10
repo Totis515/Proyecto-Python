@@ -27,9 +27,9 @@ Una plataforma web interactiva, moderna y con estética **dark cyber-eco** dise�
    - Simulación en tiempo real de hectáreas de bosque deforestadas y toneladas de hielo ártico derretidas cada segundo.
    - Métricas oficiales de CO₂ atmosférico (424+ ppm) y aumento térmico global (+1.28°C).
 
-5. **🕹️ Eco-Arcade - Zona de Jueguillos Planetarios:**
+5. **🕹️ Eco-Arcade - Módulos de Juegos Educativos:**
    - **Juego 1: "Atrapa el CO₂" (Canvas Arcade):** Pilota un *Eco-Dron* con el ratón, dedo o flechas. Atrapa energía solar (☀️), semillas (🌱) y absorbe nubes de CO₂ (💨) antes de que toquen tierra, esquivando barriles de petróleo (🛢️) que aumentan la temperatura global hacia el límite de colapso (+2.5°C). ¡Llega a 500 puntos para lograr *Cero Emisiones Netas*!
-   - **Juego 2: "Clasifica en Fa" (Blitz 30s):** Reto contrarreloj de 30 segundos para separar residuos orgánicos (🍏), reciclables (♻️) y especiales/no reciclables (⚠️) usando clics o las teclas numéricas `1`, `2` y `3`. Incluye multiplicador de racha (*Combos x1 a x5*).
+   - **Juego 2: "Clasificación Rápida" (Blitz 30s):** Reto contrarreloj de 30 segundos para separar residuos orgánicos (🍏), reciclables (♻️) y especiales/no reciclables (⚠️) usando clics o las teclas numéricas `1`, `2` y `3`. Incluye multiplicador de racha (*Combos x1 a x5*).
    - **Juego 3: "Trivia Relámpago":** Preguntas rápidas de ciencia climática con retroalimentación instantánea, explicaciones didácticas y cómputo de aciertos.
 
 6. **🛡️ Mitos vs Realidad Científica:**

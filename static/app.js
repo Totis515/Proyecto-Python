@@ -134,8 +134,8 @@ const ECOBOT_KB = [
     answer: "¡Con muchísimo gusto! 💚 Cada persona informada y activa es un faro de cambio para el planeta. ¿Quieres saber cómo optimizar tu consumo eléctrico o explorar algún otro tema?"
   },
   {
-    keywords: ['juego', 'juegos', 'jueguillo', 'jueguillos', 'arcade', 'minijuego', 'jugar', 'gamer'],
-    answer: "¡Ámonos! 🕹️ En la sección <strong><a href='#arcade' style='color:#00ff9d; text-decoration:underline;'>Eco-Arcade</a></strong> tienes tres jueguillos listos: <ol><li><strong>Atrapa el CO₂:</strong> Maneja el Eco-Dron y evita el barril de petróleo.</li><li><strong>Clasifica en Fa:</strong> Separa basura en 30 segundos haciendo combos.</li><li><strong>Trivia Relámpago:</strong> Ponte a prueba con preguntas rápidas del clima.</li></ol> ¡Baja a la sección de Jueguillos y rómpela!"
+    keywords: ['juego', 'juegos', 'arcade', 'minijuego', 'jugar', 'interactivo', 'dinamica'],
+    answer: "¡Por supuesto! 🕹️ En la sección <strong><a href='#arcade' style='color:#00ff9d; text-decoration:underline;'>Eco-Arcade</a></strong> dispones de tres módulos interactivos: <ol><li><strong>Atrapa el CO₂:</strong> Controla el Eco-Dron y captura emisiones antes de que aumente la temperatura.</li><li><strong>Clasificación Rápida:</strong> Separa residuos correctamente en 30 segundos acumulando rachas.</li><li><strong>Trivia Ambiental:</strong> Evalúa tus conocimientos con preguntas clave de ciencia climática.</li></ol> ¡Explora la sección para comenzar!"
   }
 ];
 
@@ -1178,7 +1178,7 @@ function endCatcherGame(won) {
 }
 
 /* ------------------------------------------
-   Game 2: Clasifica en Fa (Trash Sorter Blitz)
+   Game 2: Clasificación Rápida (Trash Sorter Blitz)
 --------------------------------------------- */
 const WASTE_ITEMS = [
   { name: 'Cáscara de Plátano', emoji: '🍌', type: 'organic', hint: 'Materia orgánica compostable' },

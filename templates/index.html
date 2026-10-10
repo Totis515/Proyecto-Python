@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ titulo_pagina }} | Acción Contra el Cambio Climático</title>
   <meta name="description" content="Plataforma interactiva sobre la crisis climática global. Monitorea datos en tiempo real, calcula tu huella de carbono y conversa con EcoBot, tu asistente ecológico inteligente.">
+  <link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='assets/favicon.jpg') }}">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,7 +42,7 @@
         <a href="#calculadora" class="nav-link"><i class="fa-solid fa-calculator"></i> Tu Huella</a>
         <a href="#mitos" class="nav-link"><i class="fa-solid fa-bolt"></i> Mitos vs Realidad</a>
         <a href="#soluciones" class="nav-link"><i class="fa-solid fa-seedling"></i> Acciones</a>
-        <a href="#arcade" class="nav-link"><i class="fa-solid fa-gamepad"></i> Jueguillos</a>
+        <a href="#arcade" class="nav-link"><i class="fa-solid fa-gamepad"></i> Juegos</a>
         <a href="#ecobot-section" class="nav-link"><i class="fa-solid fa-robot"></i> EcoBot IA</a>
       </nav>
 
@@ -124,7 +125,7 @@
 
         <div class="hero-visual">
           <div class="image-frame">
-            <img src="assets/hero-banner.jpg" alt="Planeta Tierra y Cambio Climático" class="hero-banner-img" id="heroImg">
+            <img src="{{ url_for('static', filename='assets/hero-banner.jpg') }}" alt="Planeta Tierra y Cambio Climático" class="hero-banner-img" id="heroImg">
             <div class="image-overlay-glow"></div>
             
             <!-- Floating interactive card on image -->
@@ -457,7 +458,7 @@
             <div class="quick-chips-container">
               <span class="chips-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Sugerencias:</span>
               <div class="chips-scroll">
-                <button class="chip-btn" onclick="sendQuickPrompt('¿Qué jueguillos hay para jugar?')">🕹️ Jueguillos Arcade</button>
+                <button class="chip-btn" onclick="sendQuickPrompt('¿Cuáles son los juegos interactivos disponibles?')">🕹️ Juegos Educativos</button>
                 <button class="chip-btn" onclick="sendQuickPrompt('¿Cuál es la diferencia entre cambio climático y calentamiento global?')">¿Qué es el cambio climático?</button>
                 <button class="chip-btn" onclick="sendQuickPrompt('¿Cuáles son 5 acciones fáciles para reducir mi huella de carbono hoy?')">5 acciones fáciles hoy</button>
                 <button class="chip-btn" onclick="sendQuickPrompt('¿Por qué 1.5 grados es tan importante?')">¿Por qué 1.5°C importa?</button>
@@ -621,9 +622,9 @@
     <section class="section arcade-section" id="arcade">
       <div class="container">
         <div class="section-header text-center">
-          <span class="section-sub"><i class="fa-solid fa-gamepad"></i> ZONA GAMER PLANETARIA</span>
-          <h2 class="section-title">Eco-Arcade <span class="text-gradient">Jueguillos en Fa</span></h2>
-          <p class="section-desc">Pásala chido mientras salvas al planeta. Demuestra tus reflejos atrapando emisiones de CO₂, clasifica residuos a toda velocidad o ponte a prueba en la trivia.</p>
+          <span class="section-sub"><i class="fa-solid fa-gamepad"></i> SIMULACIÓN Y APRENDIZAJE INTERACTIVO</span>
+          <h2 class="section-title">Eco-Arcade <span class="text-gradient">Juegos Educativos</span></h2>
+          <p class="section-desc">Aprende sobre sostenibilidad y acción climática de forma interactiva. Pon a prueba tus reflejos capturando emisiones de CO₂, clasifica residuos a contrarreloj o evalúa tus conocimientos en la trivia ambiental.</p>
         </div>
 
         <!-- Arcade Navigation Tabs -->
@@ -632,7 +633,7 @@
             <i class="fa-solid fa-cloud-bolt"></i> 1. Atrapa el CO₂ (Arcade)
           </button>
           <button class="arcade-tab-btn" onclick="switchArcadeGame('sorter', this)">
-            <i class="fa-solid fa-recycle"></i> 2. Clasifica en Fa (Blitz)
+            <i class="fa-solid fa-recycle"></i> 2. Clasificación Rápida (Blitz)
           </button>
           <button class="arcade-tab-btn" onclick="switchArcadeGame('trivia', this)">
             <i class="fa-solid fa-brain"></i> 3. Trivia Relámpago
@@ -744,7 +745,7 @@
             <div class="sorter-overlay" id="sorterOverlay">
               <div class="overlay-content">
                 <div class="overlay-icon">🗑️</div>
-                <h3 id="sorterOverlayTitle">Clasifica en Fa</h3>
+                <h3 id="sorterOverlayTitle">Clasificación de Residuos</h3>
                 <p id="sorterOverlayDesc">Tienes 30 segundos para clasificar la mayor cantidad de residuos correctamente. ¡Crea combos para multiplicar tus puntos!</p>
                 <button class="btn btn-primary btn-large" onclick="startSorterGame()">
                   <i class="fa-solid fa-play"></i> Comenzar Reto
